@@ -206,18 +206,24 @@ class circle(Scene):
         circle = VGroup(circle,radii)
         self.play(circle.animate.shift(2*RIGHT))
 
-        area = MathTex('A=\pi r^2').to_edge(LEFT).shift(2*RIGHT).shift(.5*UP)
-        perimeter = MathTex('P=2\pi r').to_edge(LEFT).shift(2*RIGHT).shift(-.5*UP)
+        area = MathTex('A','=','\pi r^2').to_edge(LEFT).shift(2*RIGHT).shift(.5*UP)
+        perimeter = MathTex('P','=','2\pi r').to_edge(LEFT).shift(2*RIGHT).shift(-.5*UP)
         self.play(Write(area),Write(perimeter))
-        
-        combined = MathTex('2\pi r=\pi r^2').to_edge(LEFT).shift(2*RIGHT)
-        self.play(ReplacementTransform(VGroup(area,perimeter),combined))
+
+        self.play(perimeter[2].animate.align_to(area[0],RIGHT+DOWN),FadeOut(area[0]),FadeOut(perimeter[:2]))
+
+        self.play(FadeOut(perimeter[2][1]),FadeOut(area[2][0]))
+        self.play(FadeOut(perimeter[2][2]),FadeOut(area[2][2]))
 
         final = MathTex('r=2').to_edge(LEFT).shift(2*RIGHT)
-        self.play(ReplacementTransform(combined,final))
+
+        self.play(ReplacementTransform(VGroup(area[1],area[2][1],perimeter[2][0]),final))
+
         area = MathTex('A=4\pi').to_edge(LEFT).shift(2*RIGHT)
         perimeter = MathTex('P=4\pi').to_edge(LEFT).shift(2*RIGHT+DOWN)
-        self.play(final.animate.shift(UP),Write(area),Write(perimeter))
+        self.wait(2)
+        self.play(final.animate.shift(UP))
+        self.play(Write(area),Write(perimeter))
 
 class general(Scene):
     def construct(self):
