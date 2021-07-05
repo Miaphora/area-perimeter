@@ -36,7 +36,7 @@ class triangle(Scene):
         sideBrace = BraceBetweenPoints(points[1],points[0])
         labelS = sideBrace.get_text('s')
         baseOverTwoBrace = BraceBetweenPoints([0,-1.5,0],[math.sqrt(3),-1.5,0])
-        baseOverTwoTex = baseOverTwoBrace.get_text(r'\frac{s}{2}')
+        baseOverTwoTex = baseOverTwoBrace.get_text(r'$\frac{s}{2}$')
         heightBrace = BraceBetweenPoints(points[0],[0,-1.5,0])
         hText = heightBrace.get_text("h")
         tri = VGroup(sideBrace,labelS,baseOverTwoBrace,baseOverTwoTex,heightBrace,hText)
@@ -49,24 +49,24 @@ class triangle(Scene):
         equals = MathTex('=').next_to(b,RIGHT)
         c = MathTex('c^2').next_to(equals,RIGHT)
 
-        area = MathTex('A=\frac{bh}{2}').to_edge(LEFT).shift(2*RIGHT)
+        area = MathTex(r'A=\frac{bh}{2}').to_edge(LEFT).shift(2*RIGHT)
         perimeter = MathTex('P=3s').align_to(area,LEFT).shift(DOWN)
 
         self.play(tri.animate.shift(2*RIGHT),Write(VGroup(a,plus,b,equals,c)),new_tri0.animate.shift(2*RIGHT),height.animate.shift(2*RIGHT))
         self.wait(1)
         self.play(Transform(a,MathTex('h^2').to_edge(LEFT).shift(2*RIGHT)))
         self.wait(1)
-        self.play(Transform(b,MathTex('\frac{s^2}{4}$').next_to(plus,RIGHT)),Transform(c,Tex(r'$s^2').next_to(equals,RIGHT)))
+        self.play(Transform(b,MathTex(r'\frac{s^2}{4}').next_to(plus,RIGHT)),Transform(c,MathTex(r's^2').next_to(equals,RIGHT)))
         self.wait(1)
 
-        ssquared = MathTex('3\frac{s^2}{4}').next_to(plus,RIGHT)
+        ssquared = MathTex(r'3\frac{s^2}{4}').next_to(plus,RIGHT)
 
         self.play(ReplacementTransform(VGroup(b,c),ssquared),equals.animate.next_to(a,RIGHT),FadeOut(plus))
         self.wait(1)
 
-        rooth = MathTex('\sqrt{h^2}').to_edge(LEFT).shift(2*RIGHT)
+        rooth = MathTex(r'\sqrt{h^2}').to_edge(LEFT).shift(2*RIGHT)
         rootequals = MathTex('=').next_to(rooth,RIGHT)
-        roots = MathTex('\sqrt{3\frac{s^2}{4}}').next_to(rootequals,RIGHT)
+        roots = MathTex(r'\sqrt{3\frac{s^2}{4}}').next_to(rootequals,RIGHT)
 
         self.play(ReplacementTransform(a,rooth),ReplacementTransform(equals,rootequals),ReplacementTransform(ssquared,roots))
         self.wait(1)
@@ -74,7 +74,7 @@ class triangle(Scene):
         pmh = MathTex('\pm')
         pms = MathTex('\pm')
         norooth = MathTex('h').next_to(pmh,RIGHT)
-        noroots = MathTex('\frac{s\sqrt{3}}{2}').next_to(pms,RIGHT)
+        noroots = MathTex(r'\frac{s\sqrt{3}}{2}').next_to(pms,RIGHT)
         VGroup(pmh,norooth).move_to(rooth.get_center())
         VGroup(pms,noroots).move_to(roots.get_center())
 
@@ -87,7 +87,7 @@ class triangle(Scene):
         self.play(heighteq.animate.shift(UP))
 
         areaA = MathTex('A').to_edge(LEFT).shift(2*RIGHT)
-        areaeqhalf = MathTex('=\frac{1}{2}').next_to(areaA,RIGHT)
+        areaeqhalf = MathTex(r'=\frac{1}{2}').next_to(areaA,RIGHT)
         areab = MathTex('s').next_to(areaeqhalf,RIGHT)
         areah = MathTex('h').next_to(areab)
 
@@ -111,7 +111,7 @@ class triangle(Scene):
 
         self.play(Transform(per3,area),Transform(areaeqhalf,MathTex('=').next_to(areaeqhalf,UP+DOWN)))
         self.wait(1)
-        self.play(Transform(per3,MathTex('\frac{12}{\sqrt{3}}$').next_to(per3,UP+DOWN)),Transform(roots,Tex(r'$s').next_to(roots,UP+DOWN)))
+        self.play(Transform(per3,MathTex(r'\frac{12}{\sqrt{3}}').next_to(per3,UP+DOWN)),Transform(roots,Tex(r's').next_to(roots,UP+DOWN)))
         self.wait(1)
         self.play(Transform(per3,MathTex('4\sqrt{3}').next_to(per3,UP+DOWN)))
         self.wait(1)
