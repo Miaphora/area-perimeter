@@ -195,6 +195,27 @@ class hexagon(Scene):
         perimeter = MathTex('P=8\sqrt{3}').to_edge(LEFT).shift(1.5*RIGHT+DOWN*0.5)
         self.play(Write(VGroup(area,perimeter)))
 
+class pentagon(Scene):
+    def construct(self):
+        points = [
+            [2*math.sin(1*math.tau/5),2*math.cos(1*math.tau/5),0],
+            [2*math.sin(2*math.tau/5),2*math.cos(2*math.tau/5),0],
+            [2*math.sin(3*math.tau/5),2*math.cos(3*math.tau/5),0],
+            [2*math.sin(4*math.tau/5),2*math.cos(4*math.tau/5),0],
+            [2*math.sin(5*math.tau/5),2*math.cos(5*math.tau/5),0]
+        ]
+        pentagon = Polygon(*points)
+        self.wait(1)
+        self.play(Create(pentagon))
+        lines = VGroup(
+            Line(points[0],[0,0,0]),
+            Line(points[1],[0,0,0]),
+            Line(points[2],[0,0,0]),
+            Line(points[3],[0,0,0]),
+            Line(points[4],[0,0,0]),
+        )
+        self.play(Create(lines))
+        self.wait(1)
 
 class circle(Scene):
     def construct(self):
