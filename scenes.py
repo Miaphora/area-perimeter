@@ -225,7 +225,7 @@ class circle(Scene):
         self.play(final.animate.shift(UP))
         self.play(Write(area),Write(perimeter))
 
-class general(Scene):
+class general_to_triangle(Scene):
     def construct(self):
         points = [
             [2*math.sin(1*math.tau/5),2*math.cos(1*math.tau/5),0],
@@ -246,3 +246,118 @@ class general(Scene):
             DashedLine([2*math.sin(5*math.tau/5),2*math.cos(5*math.tau/5),0],[0,0,0]),
         )
         self.play(Create(lines),Create(dotted))
+
+        triangle = VGroup(
+            Line(points[1],[0,0,0]),
+            Line(points[2],[0,0,0]),
+            Line(points[1],points[2]),
+        )
+
+        self.play(FadeOut(lines),FadeOut(dotted),FadeOut(pentagon),FadeIn(triangle))
+        baseBrace = BraceBetweenPoints(points[2],points[1])
+        baseBraceLabel = baseBrace.get_text('b')
+        heightBrace = BraceBetweenPoints([points[2][0],0,0],points[2])
+        heightBraceLabel = heightBrace.get_text('h')
+        self.play(Create(baseBrace),Create(baseBraceLabel),Create(heightBrace),Create(heightBraceLabel))
+        area      = MathTex('A','=',r'\frac{bh}{2}').shift(2*RIGHT+2*UP)
+        perimeter = MathTex('P','=','b')            .shift(2*LEFT +2*UP)
+        self.play(Write(area),Write(perimeter))
+
+        self.play(Transform(area[2][1],MathTex('2').move_to(area[2][1].get_center())))
+        self.play(Transform(area,MathTex('A','=','b').move_to(area.get_center())))
+
+        self.play(Transform(heightBraceLabel,MathTex('2').move_to(heightBraceLabel.get_center())))
+
+class general_triangle_trig(MovingCameraScene):
+    def construct(self):
+        points = [
+            [0,1.5,0],
+            [2.5,-1.5,0],
+            [-2.5,-1.5,0]
+        ]
+        tri = Polygon(*points)
+        self.play(Create(tri))
+
+
+        height = DashedLine([0,-1.5,0],points[0])
+        self.play(Create(height))
+
+        points = [
+            [0,1.5,0],
+            [2.5,-1.5,0],
+            [0,-1.5,0],
+            [-2.5,-1.5,0]
+        ]
+        new_tri0 = VGroup(
+            Line(points[0],points[1]).set_color(BLUE),
+            Line(points[1],points[2]).set_color(BLUE)
+        )
+        new_tri1 = VGroup(
+            Line(points[0],points[3]).set_color(BLUE),
+            Line(points[3],points[2]).set_color(BLUE)
+        )
+
+        self.wait(1)
+
+        self.add(new_tri0,new_tri1)
+        self.remove(tri)
+        self.play(FadeOut(new_tri1,shift=[-1,0,0]))
+
+        heightBrace = BraceBetweenPoints(points[0],points[2])
+        heightBraceLabel = heightBrace.get_text('2')
+
+        baseBrace = BraceBetweenPoints(points[2],points[1])
+        baseBraceLabel = baseBrace.get_tex(r'\frac{b}{2}')
+
+        angleLabel = MathTex(r'\theta').move_to(points[0]).shift(RIGHT)
+        angleArc = Arc(arc_center=points[0], start_angle=3*math.tau/4, angle=math.tau/9)
+
+        self.play(Create(heightBrace),Create(heightBraceLabel))
+        self.play(Create(baseBrace),Create(baseBraceLabel))
+        self.play(Create(angleLabel),Create(angleArc))
+
+        triangle = VGroup(
+            new_tri0,
+            height,
+            angleLabel,
+            heightBraceLabel,
+            heightBrace,
+            baseBraceLabel,
+            baseBrace,
+            angleArc,
+        )
+
+        trig_eq = MathTex(r'tan(\theta)','=',r'\frac{O}{A}').shift(2*LEFT)
+        self.play(triangle.animate.shift(2*RIGHT),Write(trig_eq))
+        new_tri1.shift(2*RIGHT)
+
+        self.play(Transform(trig_eq[2][2],MathTex('2').move_to(trig_eq[2][2].get_center())))
+        self.play(
+            Transform(trig_eq[2][0],MathTex('b').move_to(trig_eq[2][0].get_center())),
+            Transform(trig_eq[2][2],MathTex('4').move_to(trig_eq[2][2].get_center())),
+        )
+
+        new_trig_eq = MathTex('4',r'tan(\theta)','=','b').shift(2*LEFT)
+
+        self.play(
+            FadeOut(trig_eq[2][1:]),
+            trig_eq[0].animate.move_to(new_trig_eq[1].get_center()),
+            trig_eq[1].animate.move_to(new_trig_eq[2].get_center()),
+            trig_eq[2][0].animate.move_to(new_trig_eq[3].get_center()),
+            Write(new_trig_eq[0])
+        )
+
+        self.play(
+            FadeIn(new_tri1),
+            FadeOut(heightBrace),
+            FadeOut(heightBraceLabel),
+            FadeOut(baseBrace),
+            FadeOut(baseBraceLabel),
+        )
+
+        other_arc = Arc(arc_center=points[0], start_angle=3*math.tau/4, angle=-math.tau/9).shift(2*RIGHT)
+        self.play(Create(other_arc))
+
+        final_eq_for_s = MathTex('s','=','4',r'tan\bigg(',r'\frac{\tau}{2n}',r'\bigg)').shift(10*UP)
+        self.play(self.camera.frame.animate.move_to(final_eq_for_s))
+        self.play(Write(final_eq_for_s))
