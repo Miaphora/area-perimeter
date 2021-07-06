@@ -1,0 +1,83 @@
+What shapes have the same area and perimeter?
+What size equilateral triangle would?
+How about other shapes?
+There is one trivial solution for all shapes, zero,
+but what about other, non-trivial solutions.
+Let's start with a triangle.
+<triangle>
+First step, construct a triangle.
+To find the area, we need the height.
+Splitting the triangle down the middle shows a hidden right triangle.
+In order to use the Pythagorean theorem, we need to know the values.
+The hypotenuse is the triangle's side length,
+the bottom is half of the triangle's side length.
+The side on the right is the height, which is what we need to find.
+Now by substituting the values into the Pythagorean theorem,
+we find the height of the triangle.
+We are left with two S squared variables, which we can simplify.
+Then to find h we can take a squared root.
+Since the height is a length the plus or minus can be ignored.
+Now we are ready to start finding the triangle.
+Substituting height into the area for a triangle formula,
+provides a formula for the area of an equilateral triangle.
+This formula could be simplified further,
+but the S's will be canceled in the next step regardless.
+Set the equations equal, and cancel some terms.
+After simplifying the radical, we are left with a final answer.
+Using the formula's provides the same answer
+for both area and perimeter, a good sign.
+</triangle>
+A similar method should work for other shapes.
+Let's try adding a side.
+<square>
+For a square the area is S squared,
+and the perimeter is 4 S.
+Setting the equal dividing by S leaves a solution, s = 4.
+</square>
+The next shape to try is the pentagon.
+<pentagon>
+However there is not a clear way forward.
+One idea is to add 5 isosceles triangles.
+There are no right triangles,
+and the splitting trick leaves too many unknown angles.
+</pentagon>
+Continuing adding one side brings us to the hexagon.
+<hexagon>
+The hexagon is made of six equilateral triangles.
+Our previous formula for a triangle can be repurposed.
+Perimeter is six times the side length.
+Set them equal, and cancel the 6, then the S.
+Solve for S, and we have a solution for the hexagon.
+</hexagon>
+How far does this go?
+Will there be a pattern, or will each shape have to solved like this?
+Lets take this to the limit, a circle.
+<circle>
+Instead of side length, radius will be used.
+As is familiar by now, the area and perimeter formulas are used.
+Set them equal, divide common factors, simplify, and solve.
+The circle has a radius of two.
+</circle>
+Instead of continuing on, with a heptagon, octagon, nonagon, and on,
+maybe we should look for patterns, there must be a regularities.
+<general_triangle>
+Lets take our ngon, and split it into triangles.
+The area is n times the area of one triangle.
+The perimeter is n times the base of one triangle.
+This means that the area and base of each triangle must be the same.
+If the height of the triangle is two it will cancel with the two in the area formula,
+leaving a result of b, the base.
+This makes sense, considering how the circle had a radius of two.
+Now we know that the height of the triangle is two, but how can that help us find b?
+</general_triangle>
+<trig>
+Lets split our triangle in half, to get a right triangle.
+After labeling what we know, the Pythagorean theorem won't help;
+there are too many unknowns.
+But we also know the angle, and trigonometry will help here,
+the tangent function in particular.
+The tangent of angle theta is the opposite side over the adjacent side.
+Substituting our variables leads us to: tan theta equals b over 4.
+Multiplying by 4 gives us the solution to all of these problems.
+The side length is four times the tangent of tau divided by twice the number of sides.
+</trig>
