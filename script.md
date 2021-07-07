@@ -95,11 +95,11 @@ After labeling what we know, the Pythagorean theorem won't help;
 there are too many unknowns.
 But we also know the angle, and trigonometry will help here,
 the tangent function in particular.
-The tangent of angle theta is the opposite side over the adjacent side.
-Substituting our variables leads us to: tan theta equals b over 4.
+The tangent of the angle theta equals the opposite side to an angle in a triangle over the adjacent side.
+Substituting variables into that relationship leads us to: tan theta equals b over 4.
 Theta is half of the top angle of the triangle,
-and there are N triangles making a full rotation, tau.
-The angle theta is tau divided by two N.
-Multiplying by 4 gives us the solution.
-The side length is four times the tangent of tau divided by twice the number of sides.
+and there are N triangles making a full rotation of tau radians.
+The angle theta is therefore tau divided by two-N.
+Multiplying by 4 gives us our solution.
+The side length of any N-sided regular polygon is four times the tangent of tau divided by two-times the number of sides.
 </trig>
